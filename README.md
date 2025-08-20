@@ -1,6 +1,6 @@
 # DropLater 
 
-## 🛠️ Getting Started
+##  Getting Started
 
 Follow these steps to run the TALK app locally on your device:
 
@@ -9,7 +9,7 @@ Follow these steps to run the TALK app locally on your device:
 - MongoDB Locally installed
 - Node.js and npm installed
 
-### 📦 Run with Docker (recommended)
+###  Run with Docker 
 
 Follow these steps to spin up the full stack with Docker:
 
@@ -24,7 +24,7 @@ git clone https://github.com/khan1104/DropLater.git
 cd DropLater
 ```
 
-3. Build and start services (API, Worker, Redis)
+3. Build and start services 
 ```bash
 docker compose up --build
 ```
