@@ -33,15 +33,22 @@ docker compose up --build
    - Redis:      localhost:6379
    - Admin :   http://localhost:1573
 
-### crul example
+## crul examples
+### For creating notes
+curl -X POST http://localhost:4000/api/notes ^
+  -H "Content-Type: application/json" ^
+  -H "Authorization: Bearer supersecrettoken123" ^
+  -d "{\"title\":\"hello\",\"body\":\"h\",\"releaseAt\":\"2025-08-19T15:06:15.232Z\",\"webhookUrl\":\"http://sink:4001/sink\"}"
 
-curl -X POST http://localhost:4000/api/notes \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer supersecrettoken123" \
-  -d '{
-    "title": "Hello",
-    "body": "Ship me later",
-    "releaseAt": "2025-08-18T15:06:15.232Z",
-    "webhookUrl": "http://sink:4001/sink"
-  }'
+### For listing notes
+curl -X GET "http://localhost:4000/api/notes?page=1&status=delivered" ^
+  -H "Authorization: Bearer supersecrettoken123"
+
+### for replay of dead note
+curl -X POST "http://localhost:4000/api/notes/<id>/replay" ^
+  -H "Authorization: Bearer supersecrettoken123" ^
+  -H "Content-Type: application/json" ^
+  -d "{}"
+
+
 
