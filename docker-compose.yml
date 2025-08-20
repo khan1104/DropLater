@@ -32,7 +32,7 @@ services:
       - ./api:/usr/src/app
     depends_on:
       - redis
-      - sink   # optional, agar api ko sink chahiye
+      - sink   
 
   worker:
     build: ./worker

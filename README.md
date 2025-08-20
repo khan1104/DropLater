@@ -45,7 +45,7 @@ curl -X GET "http://localhost:4000/api/notes?page=1&status=delivered" ^
   -H "Authorization: Bearer supersecrettoken123"
 
 ### for replay of dead note
-curl -X POST "http://localhost:4000/api/notes/<id>/replay" ^
+curl -X POST "http://localhost:4000/api/notes/id/replay" ^
   -H "Authorization: Bearer supersecrettoken123" ^
   -H "Content-Type: application/json" ^
   -d "{}"

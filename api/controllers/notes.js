@@ -4,7 +4,7 @@ import { noteSchema } from "../schemas/notes.js";
 
 const notesQueue = new Queue("NotesQueue", {
     connection: {
-        host: process.env.REDIS_HOST || "redis", // Docker service name
+        host: process.env.REDIS_HOST || "redis", 
         port: parseInt(process.env.REDIS_PORT) || 6379,
     }
 });
