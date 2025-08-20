@@ -1,8 +1,5 @@
 # DropLater 
 
-##  Getting Started
-
-Follow these steps to run the TALK app locally on your device:
 
 ### Prerequisites
 - Docker
