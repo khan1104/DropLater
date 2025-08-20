@@ -31,4 +31,17 @@ docker compose up --build
    - Worker:     runs in background
    - sink (webhook) :  http://locahost:4001
    - Redis:      localhost:6379
-   - Admin :   http://localhost:1573 
+   - Admin :   http://localhost:1573
+
+### crul example
+
+curl -X POST http://localhost:4000/api/notes \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer supersecrettoken123" \
+  -d '{
+    "title": "Hello",
+    "body": "Ship me later",
+    "releaseAt": "2025-08-18T15:06:15.232Z",
+    "webhookUrl": "http://sink:4001/sink"
+  }'
+
