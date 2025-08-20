@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: droplater_redis
+    ports:
+      - "6379:6379"   # Redis default port
+      - "8001:8001"   # RedisInsight UI
+
+
+  admin:
+    build: ./admin
+    container_name: droplater_admin
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    container_name: droplater_api
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://host.docker.internal:27017/DropLater
+      - API_TOKEN=supersecrettoken123
+      - PORT=4000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./api:/usr/src/app
+    depends_on:
+      - redis
+      - sink   # optional, agar api ko sink chahiye
+
+  worker:
+    build: ./worker
+    container_name: droplater_worker
+    volumes:
+      - ./worker:/usr/src/app
+    depends_on:
+      - api
+      - redis
+      - sink
+    environment:
+      - MONGO_URI=mongodb://host.docker.internal:27017/DropLater
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  sink:
+    build: ./sink
+    container_name: droplater_sink
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./sink:/usr/src/app
+    environment:
+      - PORT=4001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
